@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de Mot</title>
-    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Jeu de mot</h1>
+        <h2>pour écrire plus vite !</h2>
+        <h3>:)</h3>
+    </header>
+
+    <main>
+        <div class="optionsFields">
+            <p>Choisissez votre option et tapez la proposition qui s'affiche dans le champ en-dessous.</p>
+            <div class="optionChoice">
+                <input type="radio" name="option" id="word" value="1" checked>
+                <label for="word">Mots</label>
+                <input type="radio" name="option" id="phrases" value="2">
+                <label for="phrases">Phrases</label>
+            </div>
+        </div>
+
+        <div class="wordProposed">
+            
+        </div>
+
+        <div class="inputField">
+            <input type="text" id="wordInput" name="wordInput">
+            <button id="btnChecked">Valider</button>
+        </div>
+
+        <div class="scoreDisplay">
+        </div>
+        
+    </main>
+
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,25 +1,34 @@
+let input = document.getElementById('wordInput');
+let btnCheck = document.getElementById('btnChecked');
+let allOptions = document.querySelectorAll('.optionChoice input');
+let wordDisplay = document.querySelector('.wordProposed');
+let scoreDisplay = document.querySelector('.scoreDisplay');
+
+let indexOfWord = 0;
+let score = 0;
+
 startGame();
 
 //All of the functions are stored here
 
 //function to start the game
 function startGame() {
-    let score = 0;
     let choice = [];
-    let choicePrompt = prompt('Choisissez la liste "mots" ou "phrases" ?');
+    
 
-    choice = chooseWordOrPhrase(choicePrompt);
-    score = startLoop(choice);
-    showResult(score);
+    choice = chooseWordOrPhrase();
+    startLoop(choice);
 }
 
 //function to choose between the lists
-function chooseWordOrPhrase(choicePrompt) {
-    while (choicePrompt !== 'mots' && choicePrompt !== 'phrases') {
-        choicePrompt = prompt('Vous devez écrire "mots" ou "phrases" ?');
-    }
+function chooseWordOrPhrase() {
+    allOptions.forEach(option => {
+        if (option.checked) {
+            optionChosen = option.value;
+        }
+    });
     
-    if (choicePrompt === 'mots') {
+    if ( optionChosen === "1") {
         return choice = wordsList;
     } else {    
         return choice = phrasesList;
@@ -28,22 +37,27 @@ function chooseWordOrPhrase(choicePrompt) {
 
 //function to start the loop
 function startLoop(choice) {
-    let score = 0;
-
-    for (let i = 0; i < choice.length; i++) {
-        let inputedWord = prompt('Entrez le mot : ' + choice[i]);
-        
-        if (inputedWord === choice[i]) {
-            console.log('Bravo !');
-            score += 1;
-        } else {
-            console.log('Désolé, le mot n\'est pas correct');
-        }
+    if (indexOfWord < choice.length) {
+        wordDisplay.textContent = 'Entrez le mot : ' + choice[indexOfWord];
+    } else {
+        showResult(score);
     }
-    return score;
 }
+
+btnCheck.addEventListener('click', function() {
+    console.log('Le mot est : ' + choice[indexOfWord]);
+    if (input.value === choice[indexOfWord]) {
+        console.log('Bravo !');
+        score += 1;
+    } else {
+        console.log('Désolé, le mot n\'est pas correct');
+    }
+    indexOfWord += 1;
+    startLoop(choice);
+});
+
 
 //function to show the result
 function showResult(score) {
-    console.log('Votre score est de : ' + score);
+    scoreDisplay.textContent = 'Votre score est de : ' + score  + ' sur ' + indexOfWord;
 }   
